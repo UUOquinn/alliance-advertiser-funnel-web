@@ -526,7 +526,7 @@
       uid: firstCells.findIndex((c) => /^(uid|开发者id|开发者)$/.test(c)),
       appid: firstCells.findIndex((c) => /^(appid|app_id|应用id|应用)$/.test(c)),
       posid: firstCells.findIndex((c) => /^(posid|pos_id|广告位id|广告位)$/.test(c)),
-      industry: firstCells.findIndex((c) => /^(屏蔽行业|行业|industry)$/.test(c)),
+      industry: firstCells.findIndex((c) => /^(屏蔽行业|路由行业|行业|industry)$/.test(c)),
       product: firstCells.findIndex((c) => /^(产品名称|产品|product)$/.test(c)),
     };
     const hasHeader =
@@ -792,10 +792,10 @@
       .map((r) => {
         const on = r.enabled !== false;
         return `<tr data-id="${escHtml(r.id)}">
-          <td>${escHtml(r.industry)}</td>
+          <td class="shield-plat-col-industry">${escHtml(r.industry)}</td>
           <td>${escHtml(r.product || "—")}</td>
           <td><code>${escHtml(r.strategyId)}</code></td>
-          <td>${escHtml(r.appendDim || "appId")}</td>
+          <td class="shield-plat-col-append">${escHtml(r.appendDim || "appId")}</td>
           <td>${on ? '<span class="shield-plat-tag is-on">启用</span>' : '<span class="shield-plat-tag is-off">停用</span>'}</td>
           <td class="shield-plat-actions">
             <button type="button" class="btn-sm" data-act="toggle">${on ? "停用" : "启用"}</button>
@@ -1428,7 +1428,7 @@
     const strategyId = String($("shieldPlatRouteStrategy")?.value || "").trim();
     const appendDim = String($("shieldPlatRouteDim")?.value || "appId");
     if (!industry) {
-      alert("请填写屏蔽行业");
+      alert("请填写路由行业");
       return;
     }
     if (!/^\d{3,}$/.test(strategyId)) {

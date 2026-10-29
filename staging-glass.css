@@ -1,7 +1,7 @@
 /* ═══════════════════════════════════════════════════════
- * 测试环境专属 · 白色玻璃 UI（:3001 + html.staging-ui）
+ * 白色玻璃 UI（html.staging-ui）
  * Cursor 风格：柔白底、分层毛玻璃、圆角与顺滑过渡
- * 生产 :3000 不挂载 staging-ui，本文件零影响
+ * index.html 在 :3000 与 :3001 都会挂载 github-ui + staging-ui，本文件对生产同样生效
  * ═══════════════════════════════════════════════════════ */
 
 .staging-env-badge {
@@ -876,6 +876,18 @@ html.staging-ui .content {
 html.staging-ui .content.content-home,
 html.staging-ui .content.content-strategy-query {
   padding: 0 !important;
+}
+
+/* 定向屏蔽：取消 1280 限宽，横向内边距收紧（侧栏 + 380px 策略目录） */
+html.staging-ui .content.content-shield {
+  flex: 1 1 auto !important;
+  display: flex !important;
+  flex-direction: column !important;
+  min-height: 0 !important;
+  width: 100% !important;
+  max-width: none !important;
+  margin: 0 !important;
+  padding: 8px 12px 16px !important;
 }
 
 /* 面板采用三级玻璃深度 */
@@ -3836,10 +3848,13 @@ html.staging-ui .shield-plat-suggest-input {
   color: #141414;
 }
 
-html.staging-ui .shield-plat-suggest-input:focus {
-  outline: none;
-  border-color: rgba(37, 99, 235, 0.45);
-  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.12);
+html.staging-ui .shield-plat-suggest-input:focus,
+html.github-ui.staging-ui #viewStrategyShieldPlatform .shield-plat-suggest-input:focus {
+  outline: 2px solid #2563eb !important;
+  outline-offset: 1px !important;
+  border-color: #2563eb !important;
+  box-shadow: 0 0 0 3px #2563eb33 !important;
+  transition: none !important;
 }
 
 html.staging-ui .shield-plat-suggest-list {
@@ -4126,7 +4141,7 @@ html.staging-ui .shield-plat-summary:empty {
 
 html.staging-ui .shield-plat-route-form {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: minmax(0, 1.7fr) minmax(0, 1fr);
   gap: 10px 12px;
   margin-bottom: 14px;
   align-items: end;
@@ -4146,6 +4161,28 @@ html.staging-ui .shield-plat-field > span {
   color: rgba(55, 55, 55, 0.78);
 }
 
+html.staging-ui .shield-plat-field-badge {
+  display: inline-block;
+  margin-left: 6px;
+  padding: 0 6px;
+  border-radius: 999px;
+  font-size: 10px;
+  font-style: normal;
+  font-weight: 650;
+  letter-spacing: 0;
+  line-height: 16px;
+  color: #1d4ed8;
+  background: rgba(37, 99, 235, 0.1);
+  vertical-align: 1px;
+}
+
+html.staging-ui .shield-plat-field-industry > span {
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0;
+  color: #0f172a;
+}
+
 html.staging-ui .shield-plat-field-action {
   grid-column: 1 / -1;
   justify-content: flex-end;
@@ -4163,7 +4200,15 @@ html.staging-ui .shield-plat-field-action .btn-sm {
 }
 
 html.staging-ui .shield-plat-field-dim {
-  max-width: none;
+  max-width: 132px;
+  width: 100%;
+  justify-self: end;
+}
+
+html.staging-ui .shield-plat-field-dim > span {
+  font-weight: 500;
+  letter-spacing: 0;
+  color: #94a3b8;
 }
 
 html.staging-ui .shield-plat-route-form input,
@@ -4190,6 +4235,15 @@ html.staging-ui .shield-plat-route-form select {
 
 html.staging-ui .shield-plat-route-form input:focus,
 html.staging-ui .shield-plat-route-form select:focus,
+html.github-ui.staging-ui #viewStrategyShieldPlatform .shield-plat-route-form input:focus,
+html.github-ui.staging-ui #viewStrategyShieldPlatform .shield-plat-route-form select:focus {
+  outline: 2px solid #2563eb !important;
+  outline-offset: 1px !important;
+  border-color: #2563eb !important;
+  box-shadow: 0 0 0 3px #2563eb33 !important;
+  transition: none !important;
+}
+
 html.staging-ui .shield-plat-ticket:focus {
   outline: none;
   border-color: rgba(16, 16, 16, 0.28);
@@ -4241,6 +4295,29 @@ html.staging-ui .shield-plat-table th {
   position: sticky;
   top: 0;
   z-index: 1;
+}
+
+html.staging-ui .shield-plat-table col.shield-plat-col-industry {
+  width: 28%;
+}
+
+html.staging-ui .shield-plat-table col.shield-plat-col-append {
+  width: 9%;
+}
+
+html.staging-ui .shield-plat-table th.shield-plat-col-industry,
+html.staging-ui .shield-plat-table td.shield-plat-col-industry {
+  min-width: 148px;
+  font-weight: 700;
+  color: #141414;
+}
+
+html.staging-ui .shield-plat-table th.shield-plat-col-append,
+html.staging-ui .shield-plat-table td.shield-plat-col-append {
+  width: 72px;
+  font-weight: 500;
+  font-size: 11px;
+  color: #94a3b8;
 }
 
 html.staging-ui .shield-plat-table tbody tr:last-child td {
@@ -4896,6 +4973,11 @@ html.staging-ui .shield-plat-log-msg {
   html.staging-ui .shield-plat-unresolved-item,
   html.staging-ui .shield-plat-log-grid {
     grid-template-columns: 1fr !important;
+  }
+
+  html.staging-ui .shield-plat-field-dim {
+    max-width: none;
+    justify-self: stretch;
   }
 
   html.staging-ui #viewStrategyShieldPlatform .shield-plat-panel-wide .shield-plat-api-health-slot,

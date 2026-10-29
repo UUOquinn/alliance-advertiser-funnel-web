@@ -339,6 +339,17 @@
   margin: 0 !important;
 }
 
+.github-ui .content.content-shield {
+  flex: 1 1 auto !important;
+  display: flex !important;
+  flex-direction: column !important;
+  min-height: 0 !important;
+  width: 100% !important;
+  max-width: none !important;
+  margin: 0 !important;
+  padding: 8px 12px 16px !important;
+}
+
 /* Page header — GitHub repo header */
 .github-ui .page-header {
   display: flex !important;

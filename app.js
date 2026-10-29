@@ -120,14 +120,15 @@ function switchView(view) {
   document.getElementById("viewStrategyShieldPlatform")?.classList.toggle("hidden", view !== "strategy-shield-platform");
   document.getElementById("viewHandbook")?.classList.toggle("hidden", view !== "handbook");
 
+  const isShield = view === "strategy-shield-platform";
   const isFullChat =
     view === "strategy-query" ||
     view === "strategy-audit" ||
-    view === "strategy-renewal" ||
-    view === "strategy-shield-platform";
+    view === "strategy-renewal";
   const isHome = view === "home";
   const isHandbook = view === "handbook";
   document.querySelector(".content")?.classList.toggle("content-strategy-query", isFullChat);
+  document.querySelector(".content")?.classList.toggle("content-shield", isShield);
   document.querySelector(".content")?.classList.toggle("content-home", isHome);
   document.getElementById("resetBtn")?.classList.add("hidden");
   document.getElementById("statusBadge")?.classList.add("hidden");

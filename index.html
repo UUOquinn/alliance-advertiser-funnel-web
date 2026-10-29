@@ -7,9 +7,9 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css?v=9.31-postpone-form-fix">
-  <link rel="stylesheet" href="github-ui.css?v=1.43-api-path-name">
-  <link rel="stylesheet" href="staging-glass.css?v=5.99-api-path-label">
+  <link rel="stylesheet" href="styles.css?v=9.32-content-shield">
+  <link rel="stylesheet" href="github-ui.css?v=1.44-content-shield">
+  <link rel="stylesheet" href="staging-glass.css?v=6.00-shield-focus">
   <script>
     // ─── 环境识别 ───
     // 3000 生产 / 3001 测试：共用 github-ui + staging-ui 玻璃主题
@@ -407,9 +407,9 @@
                 </div>
                 <p class="shield-plat-hint">可选：行业/产品自动命中策略。优先使用右侧勾选的策略目录。</p>
                 <div class="shield-plat-route-form">
-                  <label class="shield-plat-field">
-                    <span>屏蔽行业</span>
-                    <input id="shieldPlatRouteIndustry" type="text" placeholder="如：游戏" autocomplete="off">
+                  <label class="shield-plat-field shield-plat-field-industry">
+                    <span>路由行业 <i class="shield-plat-field-badge">自由填写</i></span>
+                    <input id="shieldPlatRouteIndustry" type="text" placeholder="自由填写，如：游戏" autocomplete="off">
                   </label>
                   <label class="shield-plat-field">
                     <span>产品名称</span>
@@ -434,12 +434,20 @@
                 </div>
                 <div class="shield-plat-table-wrap">
                   <table class="shield-plat-table">
+                    <colgroup>
+                      <col class="shield-plat-col-industry">
+                      <col>
+                      <col>
+                      <col class="shield-plat-col-append">
+                      <col>
+                      <col>
+                    </colgroup>
                     <thead>
                       <tr>
-                        <th>行业</th>
+                        <th class="shield-plat-col-industry">行业</th>
                         <th>产品</th>
                         <th>策略ID</th>
-                        <th>追加维</th>
+                        <th class="shield-plat-col-append">追加维</th>
                         <th>状态</th>
                         <th>操作</th>
                       </tr>
@@ -484,8 +492,8 @@
                     <h3 id="shieldPlatAppendMapTitle" class="shield-plat-append-title">映射策略</h3>
                     <p class="shield-plat-muted shield-plat-append-sub">屏蔽维度：行业筛选 + 策略名称可多选（同维）</p>
                     <label class="shield-plat-field shield-plat-suggest-field">
-                      <span>屏蔽行业</span>
-                      <input id="shieldPlatIndustrySearch" class="shield-plat-suggest-input" type="search" placeholder="搜索屏蔽行业…" autocomplete="off">
+                      <span>筛选行业 <i class="shield-plat-field-badge">搜索建议</i></span>
+                      <input id="shieldPlatIndustrySearch" class="shield-plat-suggest-input" type="search" placeholder="搜索并选择行业…" autocomplete="off">
                       <div id="shieldPlatIndustrySuggest" class="shield-plat-suggest-list" hidden role="listbox"></div>
                     </label>
                     <label class="shield-plat-field shield-plat-suggest-field">
@@ -1321,7 +1329,7 @@ sequenceDiagram
   <script src="strategy-query.js?v=1.15-home-logs"></script>
   <script src="strategy-renewal.js?v=1.3-cookie-status"></script>
   <script src="shield-platform-catalog-seed.js?v=1.0"></script>
-  <script src="strategy-shield-platform.js?v=1.16-multi-select"></script>
+  <script src="strategy-shield-platform.js?v=1.17-route-industry"></script>
   <script src="strategy-postpone.js?v=1.10"></script>
   <script src="strategy-audit.js?v=5.60-orient-contract"></script>
   <script src="https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.min.js"></script>
